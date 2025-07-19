@@ -1,0 +1,109 @@
+
+
+
+
+WIRCACA PROJECT : STUDENT MONITORING SYSTEM WITH LOGIN AND SIGNOUT
+
+Project duration : February 20, 2021 - April 2021
+
+
+IDE used : Netbeans IDE 8.2 Version
+
+DATABASE USED : MYSQL Software, XAMPP Control Panel, and Java Embedded Database
+
+
+Una, Gumamit ako ng Embedded Database sa Login and Signout. JAVA DB yung gamit ko.Nasa Services ng Netbeans IDE.
+
+Pangalawa, yung Music ay gumamit ako ng source code sa main class, then iccall out ko sila everytime sa mismong (1st class after ng import sa taas), Ang mga kanta nakalagay sa Main Source Packages. Pwede din naman hindi pero di siya nag pplay. 
+
+(ito example : public class logLoad ......... )
+
+MusicHelper mh = new MusicHelper();
+
+And next naman noon ay ilalagay ko yung mga kanta ko na nasa Music Helper papunta sa initComponents();
+
+Ex. 
+
+sounds = getClass().getResource("1lofi.wav");
+        err = getClass().getResource("ERROR 1.4 SEC.wav");
+        warnings = getClass().getResource("WARNING 1.1 SEC.wav");
+        logouts = getClass().getResource("l_o.wav");
+        unsus = getClass().getResource("unsuspicous.wav");
+        success = getClass().getResource("final success.wav");
+        attemptload = getClass().getResource("attemptloading.wav");
+
+Pangatlo, gumamit ako ng thread sa mismong splash screen para kahit pabalik pabalik ay okay lang. Tapos iccall out mo sya doon sa mismong |  initComponents ();  |
+
+Example:
+
+............
+...............
+..................
+
+
+public logLoad() {
+        initComponents();
+	loading();
+
+}
+
+
+
+private void loading(){
+    new Thread(new Runnable() {
+        @Override
+        public void run() {
+            
+            Logout t = new Logout();
+          
+            try {
+                for (int i = 0; i <101; i++){
+                Thread.sleep(45);
+                percent.setText(i + "%");
+                
+                if(i ==5){
+                     val.setText("Turning off Modules......");
+                     MusicHelper.logoutBg(logouts);
+                }
+                if(i ==25){
+                     val.setText("Stopping Database......");
+                }
+                if(i ==45){
+                     val.setText("Logging out Student......");
+                }
+                if(i ==65){
+                     val.setText("Removing Connection.....");
+                }
+                if(i ==70){
+                     val.setText("Disconnecting to Server.....");
+                }
+                if(i ==80){
+                     val.setText("Generating Logout Page.....");
+                }
+                if(i ==91){
+                     val.setText("Logout Complete");
+                }
+                if(i ==100){
+                   val.setText("Welcome to Logout Page");  
+                }
+                jProgressBar1.setValue(i);    
+            }   
+            } catch (Exception e) {
+                
+            }
+            t.setVisible(true);
+            dispose();
+            }       
+    }).start();
+}
+
+
+Pangapat, Pag hindi open ang Xampp at mysql workbench di mag rrun ang database. Pero sa embedded Java database naman dapat di open ang database kasi mag eeror if open siya.
+
+Panglima, keep note yung pag ccall out sa database ay either ganito. Select From * / SELECT FROM *. Dipende yan. Pero double check mo nalang. Marami pang caller sa databases find mo nalang.  
+
+Panganim, sa paggawa ng table sa mysql workbench : remove mo yung word na (VISIBLE) nasa ending part eto kung tama pagkakaalala ko at yung |   )); / }};   | yung ganyan before matapos yung statement. And, keep note sa paggawa ng column sa MariaDB hindi sya tumatanggap ng special characters. Ang driver ko is    [ com.mysql.cj.jdbc.Driver ]
+
+And yung workbench mysql = No password : "root" - username natin. Check mo nalang yung iaatach ko na picture.
+
+
